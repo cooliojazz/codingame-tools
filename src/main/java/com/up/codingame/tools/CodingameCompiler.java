@@ -30,14 +30,13 @@ public class CodingameCompiler {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String compiled = compile(parseClasses());
+        String compiled = compile(parseClasses(new File(args[0])));
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(compiled), null);
         System.out.println(compiled);
     }
     
-    private static List<JavaClass> parseClasses() {
-        File root = new File("src/main/java/");
-        return parseDir(root);
+    private static List<JavaClass> parseClasses(File root) {
+        return parseDir(new File(root, "src/main/java/"));
     }
     
     private static List<JavaClass> parseDir(File dir) {
